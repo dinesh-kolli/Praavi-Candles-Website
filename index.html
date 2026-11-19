@@ -1,88 +1,431 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Praavi Candle</title>
+<title>Praavi Candle — Handmade Candles</title>
+<meta name="description" content="Praavi Candle — handmade scented, decorative, gift and customized candles. Order easily on WhatsApp.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕯️</text></svg>">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:#fffaf5;color:#34251f}
-header{background:#38251f;color:white;padding:25px;text-align:center}
-header h1{font-family:Georgia,serif;font-size:30px}
-header p{color:#e8c9a9;margin-top:8px}
-nav{display:flex;justify-content:center;gap:20px;padding:15px;background:#f2e4d7}
-nav a{color:#38251f;text-decoration:none;font-weight:bold}
-.hero{text-align:center;padding:65px 20px;background:linear-gradient(135deg,#ead1b9,#fff5e9)}
-.hero h2{font-family:Georgia,serif;font-size:32px;margin-bottom:15px}
-.hero p{line-height:1.7}
-.btn{display:inline-block;background:#78472f;color:white;padding:13px 25px;border-radius:25px;text-decoration:none;margin-top:20px}
-section{padding:40px 18px}
-.title{text-align:center;font-family:Georgia,serif;margin-bottom:25px;font-size:27px}
-.products{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
-.card{background:white;border-radius:13px;overflow:hidden;box-shadow:0 3px 12px #00000012;text-align:center;padding-bottom:17px}
-.card img{width:100%;height:145px;object-fit:cover}
-.card h3{font-size:16px;margin:12px 5px}
-.card p{color:#82583e;font-weight:bold}
-.card a{display:inline-block;margin-top:12px;background:#78472f;color:white;padding:9px 15px;border-radius:20px;text-decoration:none;font-size:13px}
-.about{text-align:center;line-height:1.8;background:#f4e8dd}
-.contact{text-align:center}
-footer{background:#38251f;color:white;text-align:center;padding:22px;font-size:13px}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:#fffaf5;color:#34251f;line-height:1.5}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1100px;margin:0 auto}
+
+/* Header */
+header{background:#38251f;color:#fff;padding:14px 18px;position:sticky;top:0;z-index:50;box-shadow:0 2px 10px #0003}
+.head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{font-family:Georgia,serif;font-size:24px;text-decoration:none;color:#fff}
+.logo small{display:block;font-family:Arial,sans-serif;font-size:11px;color:#e8c9a9;letter-spacing:.5px}
+nav{display:flex;gap:18px}
+nav a{text-decoration:none;color:#f2e4d7;font-weight:bold;font-size:14px}
+nav a:hover{color:#fff}
+.cart-btn{background:#c98a5a;color:#fff;border:0;border-radius:22px;padding:9px 15px;font-weight:bold;cursor:pointer;font-size:14px;white-space:nowrap}
+.cart-btn span{background:#fff;color:#38251f;border-radius:50%;padding:1px 7px;margin-left:5px;font-size:12px}
+@media(max-width:700px){nav{display:none}}
+
+/* Mobile nav */
+.mnav{display:none;gap:6px;overflow-x:auto;padding:8px 12px;background:#f2e4d7;position:sticky;top:64px;z-index:40}
+.mnav a{text-decoration:none;font-weight:bold;font-size:13px;padding:6px 12px;border-radius:15px;background:#fff;white-space:nowrap}
+@media(max-width:700px){.mnav{display:flex}}
+
+/* Hero */
+.hero{text-align:center;padding:70px 20px;background:linear-gradient(135deg,#ead1b9,#fff5e9)}
+.hero h1{font-family:Georgia,serif;font-size:36px;margin-bottom:12px}
+.hero .te{font-size:18px;color:#78472f;margin-bottom:10px}
+.hero p{max-width:560px;margin:0 auto;color:#5a4035}
+.btn{display:inline-block;background:#78472f;color:#fff;padding:13px 26px;border-radius:25px;text-decoration:none;margin:20px 6px 0;border:0;font-size:15px;cursor:pointer;font-weight:bold}
+.btn.alt{background:#25d366}
+.btn:hover{opacity:.9}
+
+/* Features */
+.feats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:25px 18px;background:#fff}
+.feat{text-align:center;padding:12px}
+.feat b{display:block;font-size:26px}
+.feat span{font-size:13px;color:#6b4c3b}
+@media(max-width:700px){.feats{grid-template-columns:repeat(2,1fr)}}
+
+section{padding:50px 18px}
+.title{text-align:center;font-family:Georgia,serif;margin-bottom:8px;font-size:28px}
+.sub{text-align:center;color:#82583e;margin-bottom:25px}
+
+/* Filters */
+.filters{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:22px}
+.filters button{border:1px solid #c9a588;background:#fff;color:#38251f;border-radius:20px;padding:7px 15px;cursor:pointer;font-size:13px}
+.filters button.on{background:#38251f;color:#fff;border-color:#38251f}
+
+/* Products */
+.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+@media(max-width:520px){.products{grid-template-columns:repeat(2,1fr);gap:10px}}
+.card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 3px 12px #00000014;display:flex;flex-direction:column}
+.pic{aspect-ratio:4/5;background:#f3e6d8;display:flex;align-items:center;justify-content:center;font-size:56px;position:relative;cursor:zoom-in}
+.pic img{width:100%;height:100%;object-fit:contain;position:absolute;inset:0}
+.tag{position:absolute;top:8px;left:8px;background:#38251f;color:#fff;font-size:11px;padding:3px 8px;border-radius:10px;z-index:2}
+.card .body{padding:12px;display:flex;flex-direction:column;flex:1}
+.card h3{font-size:15px;margin-bottom:4px}
+.card .d{font-size:12px;color:#6b4c3b;flex:1}
+.price{color:#78472f;font-weight:bold;font-size:17px;margin:8px 0}
+.price s{color:#aaa;font-size:13px;font-weight:normal;margin-left:5px}
+.add{background:#78472f;color:#fff;border:0;border-radius:20px;padding:9px;cursor:pointer;font-weight:bold;font-size:13px}
+.add.done{background:#4a7c3a}
+
+
+/* Custom */
+.custom{background:#f4e8dd}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:start}
+@media(max-width:760px){.cgrid{grid-template-columns:1fr}}
+.cgrid ul{list-style:none}
+.cgrid li{padding:8px 0;border-bottom:1px dashed #d3b59c}
+form{background:#fff;padding:18px;border-radius:14px;box-shadow:0 3px 12px #0001}
+label{display:block;font-size:13px;font-weight:bold;margin:10px 0 4px}
+input,select,textarea{width:100%;padding:10px;border:1px solid #d6bca6;border-radius:8px;font-size:14px;font-family:inherit}
+textarea{min-height:70px}
+
+/* Steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:760px){.steps{grid-template-columns:repeat(2,1fr)}}
+.step{background:#fff;border-radius:14px;padding:18px;text-align:center;box-shadow:0 3px 12px #0001}
+.step b{display:inline-flex;width:34px;height:34px;align-items:center;justify-content:center;background:#78472f;color:#fff;border-radius:50%;margin-bottom:8px}
+.step p{font-size:13px;color:#6b4c3b}
+
+/* About */
+.about{text-align:center;background:#38251f;color:#f2e4d7}
+.about .title{color:#fff}
+.about p{max-width:640px;margin:0 auto 10px;line-height:1.8}
+
+/* Reviews */
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:760px){.revs{grid-template-columns:1fr}}
+.rev{background:#fff;border-radius:14px;padding:18px;box-shadow:0 3px 12px #0001}
+.rev .st{color:#e0a100}
+.rev p{font-size:14px;margin:8px 0;color:#5a4035}
+.rev small{color:#999}
+
+/* FAQ */
+details{background:#fff;border-radius:10px;margin-bottom:10px;padding:14px;box-shadow:0 2px 8px #0001;max-width:760px;margin-left:auto;margin-right:auto}
+summary{font-weight:bold;cursor:pointer}
+details p{margin-top:8px;color:#5a4035;font-size:14px}
+
+/* Contact */
+.contact{text-align:center;background:#f4e8dd}
+.contact p{margin:6px 0}
+
+footer{background:#38251f;color:#f2e4d7;text-align:center;padding:24px;font-size:13px}
+footer a{color:#e8c9a9}
+
+/* Floating WhatsApp */
+.wa{position:fixed;right:16px;bottom:16px;background:#25d366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px #0004;z-index:60;text-decoration:none}
+.wa svg{width:30px;height:30px;fill:#fff}
+
+/* Cart drawer */
+.overlay{position:fixed;inset:0;background:#0006;opacity:0;pointer-events:none;transition:.25s;z-index:80}
+.overlay.show{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(400px,100%);background:#fffaf5;z-index:90;transform:translateX(100%);transition:.3s;display:flex;flex-direction:column}
+.drawer.show{transform:none}
+.dh{background:#38251f;color:#fff;padding:16px;display:flex;justify-content:space-between;align-items:center}
+.dh button{background:none;border:0;color:#fff;font-size:26px;cursor:pointer}
+.items{flex:1;overflow-y:auto;padding:14px}
+.item{display:flex;gap:10px;align-items:center;background:#fff;padding:10px;border-radius:10px;margin-bottom:10px;box-shadow:0 2px 6px #0001}
+.item .e{font-size:30px}
+.item .n{flex:1;font-size:14px}
+.item .n small{display:block;color:#82583e}
+.qty{display:flex;align-items:center;gap:6px}
+.qty button{width:28px;height:28px;border-radius:50%;border:1px solid #c9a588;background:#fff;cursor:pointer;font-size:16px}
+.empty{text-align:center;color:#999;padding:40px 10px}
+.df{padding:14px;border-top:1px solid #e6d3c2;background:#fff}
+.row{display:flex;justify-content:space-between;margin:4px 0;font-size:14px}
+.row.t{font-weight:bold;font-size:17px}
+.df .btn{width:100%;margin:10px 0 0;text-align:center}
+.note{font-size:11px;color:#999;text-align:center;margin-top:6px}
+
+.toast{position:fixed;left:50%;bottom:85px;transform:translateX(-50%) translateY(20px);background:#38251f;color:#fff;padding:10px 18px;border-radius:20px;opacity:0;transition:.25s;z-index:100;font-size:14px;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%)}
 </style>
 </head>
 <body>
+
 <header>
-<h1>Praavi Candle</h1>
-<p>Light Up Your Special Moments ✨</p>
+  <div class="wrap head">
+    <a href="#home" class="logo">🕯️ Praavi Candle<small>Light Up Your Special Moments</small></a>
+    <nav>
+      <a href="#shop">Shop</a>
+      <a href="#custom">Customize</a>
+      <a href="#how">How to Order</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="cart-btn" onclick="openCart()">🛒 Cart<span id="count">0</span></button>
+  </div>
 </header>
-<nav>
-<a href="#home">Home</a>
-<a href="#products">Products</a>
-<a href="#about">About</a>
-<a href="#contact">Contact</a>
-</nav>
+<div class="mnav">
+  <a href="#shop">Shop</a><a href="#custom">Customize</a><a href="#how">How to Order</a><a href="#about">About</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
+</div>
+
 <div class="hero" id="home">
-<h2>Make Every Moment Special</h2>
-<p>Beautiful Handmade Candles<br>Customized Candles • Scented Candles • Gift Candles</p>
-<a href="#products" class="btn">Explore Collection</a>
+  <p class="te">ప్రతి క్షణం ప్రత్యేకం ✨</p>
+  <h1>Handmade Candles for Every Moment</h1>
+  <p>Terracotta diyas, urli candles, lotus candles, tealight sets and festive gift candles — handmade with pure soya wax. Add to cart and order directly on WhatsApp.</p>
+  <a href="#shop" class="btn">Shop Collection</a>
+  <a href="#custom" class="btn alt">Customize a Candle</a>
 </div>
-<section id="products">
-<h2 class="title">Our Collections</h2>
-<div class="products">
-<div class="card">
-<img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?w=500" alt="Scented candles">
-<h3>Scented Candles</h3><p>Contact for Price</p>
-<a href="#contact">Order Now</a>
+
+<div class="feats">
+  <div class="feat"><b>🤲</b><span>100% Handmade</span></div>
+  <div class="feat"><b>🌿</b><span>Pure soya wax • Lavender fragrance</span></div>
+  <div class="feat"><b>🎁</b><span>Gift-ready packing</span></div>
+  <div class="feat"><b>💬</b><span>Easy WhatsApp ordering</span></div>
 </div>
-<div class="card">
-<img src="https://images.unsplash.com/photo-1602523961358-f9f03dd557db?w=500" alt="Decorative candles">
-<h3>Decorative Candles</h3><p>Contact for Price</p>
-<a href="#contact">Order Now</a>
-</div>
-<div class="card">
-<img src="https://images.unsplash.com/photo-1602874801007-bd458bb1b8b6?w=500" alt="Gift candles">
-<h3>Gift Candles</h3><p>Contact for Price</p>
-<a href="#contact">Order Now</a>
-</div>
-<div class="card">
-<img src="https://images.unsplash.com/photo-1603905179139-d8d5a7a0d2a2?w=500" alt="Luxury candles">
-<h3>Luxury Candles</h3><p>Contact for Price</p>
-<a href="#contact">Order Now</a>
-</div>
-</div>
+
+<section id="shop">
+  <div class="wrap">
+    <h2 class="title">Our Collection</h2>
+    <p class="sub">40 handmade designs • Tap a photo to zoom • Add to cart and order on WhatsApp</p>
+    <div class="filters" id="filters"></div>
+    <div class="products" id="products"></div>
+  </div>
 </section>
+
+<section class="custom" id="custom">
+  <div class="wrap">
+    <h2 class="title">Customized Candles</h2>
+    <p class="sub">Birthdays • Weddings • Return gifts • Festivals • Corporate gifts</p>
+    <div class="cgrid">
+      <div>
+        <ul>
+          <li>✏️ Your name, photo or message on the candle</li>
+          <li>🎨 Choose colour, shape and fragrance</li>
+          <li>📦 Bulk orders for functions and return gifts</li>
+          <li>🪔 Special Diwali, Christmas and wedding designs</li>
+          <li>🎀 Gift boxes with personal notes</li>
+        </ul>
+        <p style="margin-top:14px;color:#6b4c3b;font-size:14px">Fill the form and it opens WhatsApp with all your details ready to send. We'll reply with the price and delivery date.</p>
+      </div>
+      <form id="cform">
+        <label>Your Name *</label><input id="cname" required>
+        <label>Occasion</label>
+        <select id="cocc"><option>Birthday</option><option>Wedding</option><option>Return Gifts</option><option>Festival (Diwali / Christmas)</option><option>Anniversary</option><option>Corporate Gift</option><option>Other</option></select>
+        <label>How many candles?</label><input id="cqty" type="number" min="1" value="1">
+        <label>Fragrance</label>
+        <select id="cfrag"><option>Lavender</option><option>Rose</option><option>Jasmine</option><option>Vanilla</option><option>Sandalwood</option><option>No fragrance</option></select>
+        <label>Name / message / design idea</label><textarea id="cmsg" placeholder="e.g. 'Happy Birthday Ananya' in pink, heart shape"></textarea>
+        <label>Needed by (date)</label><input id="cdate" type="date">
+        <button class="btn alt" type="submit" style="width:100%">Send on WhatsApp</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <h2 class="title">How to Order</h2>
+    <p class="sub">Simple 4 steps</p>
+    <div class="steps">
+      <div class="step"><b>1</b><h4>Choose</h4><p>Add your favourite candles to the cart</p></div>
+      <div class="step"><b>2</b><h4>Send</h4><p>Tap “Order on WhatsApp” — your list is sent automatically</p></div>
+      <div class="step"><b>3</b><h4>Confirm</h4><p>We confirm price, delivery and payment (UPI / Cash)</p></div>
+      <div class="step"><b>4</b><h4>Enjoy</h4><p>Your candles arrive packed safely ✨</p></div>
+    </div>
+  </div>
+</section>
+
 <section class="about" id="about">
-<h2 class="title">About Praavi Candle</h2>
-<p>Beautiful handmade and customized candles for your special occasions.<br>Quality • Creativity • Happiness</p>
+  <h2 class="title">About Praavi Candle</h2>
+  <p>Praavi Candle makes beautiful handmade candles for your special moments. Every candle is poured by hand in small batches, with care for quality, fragrance and finish.</p>
+  <p><b>Quality • Creativity • Happiness</b></p>
 </section>
+
+<section id="reviews">
+  <div class="wrap">
+    <h2 class="title">What Customers Say</h2>
+    <p class="sub">Share your experience with us on WhatsApp — we'll add it here!</p>
+    <div class="revs" id="revs"></div>
+  </div>
+</section>
+
+<section id="faq">
+  <h2 class="title">Questions</h2>
+  <p class="sub">Frequently asked</p>
+  <details><summary>How do I pay?</summary><p>After you send your order on WhatsApp, we confirm the total and share UPI details. Cash on delivery may be available for nearby locations.</p></details>
+  <details><summary>Do you deliver to my town?</summary><p>Yes, we deliver across India. Delivery charges depend on your location and are confirmed on WhatsApp before payment.</p></details>
+  <details><summary>How long does a custom order take?</summary><p>Usually 3–7 days depending on design and quantity. For bulk orders please message us early.</p></details>
+  <details><summary>How long does a candle burn?</summary><p>It depends on size — the burn time is mentioned with each product. Trim the wick and burn for 2–3 hours the first time for best results.</p></details>
+  <details><summary>Is it safe?</summary><p>Always burn candles on a heat-safe surface, away from children, pets, curtains and anything that can catch fire. Never leave a burning candle unattended.</p></details>
+</section>
+
 <section class="contact" id="contact">
-<h2 class="title">Contact Us</h2>
-<p>For Orders and Customization</p>
-<a class="btn" href="https://wa.me/919493735855?text=Hello%20Praavi%20Candle%2C%20I%20want%20to%20place%20an%20order.
+  <h2 class="title">Contact Us</h2>
+  <p>For orders, bulk orders and customization</p>
+  <p>📱 WhatsApp / Call: <a id="phoneLink" href="#"></a></p>
+  <a class="btn alt" id="waContact" href="#" target="_blank" rel="noopener">Chat on WhatsApp</a>
 </section>
+
 <footer>
-<p>© 2026 Praavi Candle</p>
-<p>Made with ❤️</p>
+  <p>© <span id="yr"></span> Praavi Candle • Handmade with ❤️</p>
 </footer>
+
+<a class="wa" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 32 32"><path d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.2.6 4.4 1.7 6.3L3 29l7.3-1.9c1.8 1 3.8 1.5 5.8 1.5 7 0 12.7-5.7 12.7-12.6S23 3 16 3zm0 23.1c-1.9 0-3.7-.5-5.3-1.4l-.4-.2-4.3 1.1 1.2-4.2-.3-.4c-1-1.6-1.5-3.5-1.5-5.4 0-5.8 4.7-10.5 10.6-10.5 5.8 0 10.5 4.7 10.5 10.5S21.8 26.1 16 26.1zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.7s1.2 3.2 1.4 3.4c.2.2 2.4 3.6 5.7 5 .8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.7-.5z"/></svg>
+</a>
+
+<!-- Cart -->
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<aside class="drawer" id="drawer">
+  <div class="dh"><h3>🛒 Your Cart</h3><button onclick="closeCart()" aria-label="Close">×</button></div>
+  <div class="items" id="items"></div>
+  <div class="df">
+    <div class="row"><span>Items</span><span id="nItems">0</span></div>
+    <div class="row t"><span>Total</span><span id="total">₹0</span></div>
+    <label>Your Name</label><input id="oname" placeholder="Name">
+    <label>Delivery Address / Town</label><textarea id="oaddr" placeholder="House, street, town, PIN" style="min-height:55px"></textarea>
+    <button class="btn alt" onclick="checkout()">Order on WhatsApp</button>
+    <p class="note">Delivery charges confirmed on WhatsApp</p>
+  </div>
+</aside>
+
+<div class="toast" id="toast"></div>
+<div id="lb" onclick="this.style.display='none'" style="display:none;position:fixed;inset:0;background:#000d;z-index:120;align-items:center;justify-content:center;padding:16px;cursor:zoom-out"><img id="lbimg" alt="" style="max-height:92vh;max-width:100%;border-radius:10px"></div>
+
+<script>
+/* =========================================================
+   ✏️ EDIT HERE — your WhatsApp number, products and prices
+   ========================================================= */
+const WHATSAPP = "919493735855";   // 91 + 10-digit number, no + or spaces
+
+const PRODUCTS = [
+  {id:1, name:"Terracotta Divya – Pink Flower", cat:"Terracotta Diyas", price:20, img:"images/candle-01.jpg", d:"Eco-friendly terracotta diya with flower"},
+  {id:2, name:"Colourful Flower Diyas", cat:"Terracotta Diyas", price:20, img:"images/candle-02.jpg", d:"Terracotta diyas in blue, pink, green, yellow & purple"},
+  {id:3, name:"Pink Lotus Candle", cat:"Lotus & Flower", price:100, img:"images/candle-03.jpg", d:"Pure soya wax • Lavender • ~5 hrs burn", tag:"Bestseller"},
+  {id:4, name:"Shell Candle", cat:"Urli & Bowl", price:110, img:"images/candle-04.jpg", d:"Shell design • Pure soya wax • 10–12 hrs burn"},
+  {id:5, name:"Flower Tealight Strip", cat:"Tealight Sets", price:50, img:"images/candle-05.jpg", d:"Pack of flower tealights • many colours"},
+  {id:6, name:"Floral Tealight Box (10 designs)", cat:"Tealight Sets", price:119, img:"images/candle-06.jpg", d:"10 unique floral designs • Lavender • ~2 hrs each"},
+  {id:7, name:"Baby Feet Tealight Box", cat:"Tealight Sets", price:110, img:"images/candle-07.jpg", d:"Cute baby-feet design • Lavender • ~2 hrs each"},
+  {id:8, name:"Lotus Bowl Candle", cat:"Urli & Bowl", price:100, img:"images/candle-08.jpg", d:"Pure soya wax • Lavender • ~5 hrs burn"},
+  {id:9, name:"Round Diya Candle Set", cat:"Diya Sets", price:200, img:"images/candle-09.jpg", d:"7 diyas, middle flower design • Lavender", tag:"Deal"},
+  {id:10, name:"White Lotus Candle", cat:"Lotus & Flower", price:80, img:"images/candle-10.jpg", d:"Elegant white lotus with gold edges"},
+  {id:11, name:"Round Bowl Urli Candle", cat:"Urli & Bowl", price:110, img:"images/candle-11.jpg", d:"Floral design • Lavender • 10–12 hrs burn"},
+  {id:12, name:"Royal Peacock Urli", cat:"Urli & Bowl", price:350, img:"images/candle-12.jpg", d:"Royal peacock urli with 6 flower diyas", tag:"Premium"},
+  {id:13, name:"Tulip Bouquet Candle", cat:"Lotus & Flower", price:80, img:"images/candle-13.jpg", d:"Natural soy wax • Perfect for gifts & décor"},
+  {id:14, name:"Terracotta Divya – Yellow", cat:"Terracotta Diyas", price:18, img:"images/candle-14.jpg", d:"Eco-friendly terracotta • Handmade"},
+  {id:15, name:"Terracotta Divya – Red Flower", cat:"Terracotta Diyas", price:15, img:"images/candle-15.jpg", d:"Eco-friendly terracotta • Handmade", tag:"Lowest price"},
+  {id:16, name:"Terracotta Divya – Blue", cat:"Terracotta Diyas", price:18, img:"images/candle-16.jpg", d:"Eco-friendly terracotta • Handmade"},
+  {id:17, name:"Terracotta Divya – White", cat:"Terracotta Diyas", price:18, img:"images/candle-17.jpg", d:"Eco-friendly terracotta • Handmade"},
+  {id:18, name:"Floral Urli – Gold", cat:"Urli & Bowl", price:95, img:"images/candle-18.jpg", d:"Festive flower urli • Long burn time"},
+  {id:19, name:"Green Flower Tealights (Set of 8)", cat:"Tealight Sets", price:99, img:"images/candle-19.jpg", d:"8 tealights + flower top • Smokeless"},
+  {id:20, name:"Sunflower Tealights (Set of 8)", cat:"Tealight Sets", price:99, img:"images/candle-20.jpg", d:"8 sunflower tealights • Smokeless"},
+  {id:21, name:"Pink Flower Tealights (Set of 8)", cat:"Tealight Sets", price:99, img:"images/candle-21.jpg", d:"8 pink flower tealights"},
+  {id:22, name:"Red Flower Tealights (Set of 8)", cat:"Tealight Sets", price:99, img:"images/candle-22.jpg", d:"8 red flower tealights"},
+  {id:23, name:"Yellow Flower Tealights (Set of 8)", cat:"Tealight Sets", price:99, img:"images/candle-23.jpg", d:"8 yellow flower tealights"},
+  {id:24, name:"Colourful Diya Set", cat:"Diya Sets", price:190, img:"images/candle-24.jpg", d:"Golden diyas with colourful flower candles"},
+  {id:25, name:"Glass Jar Candle", cat:"Gift & Festive", price:40, img:"images/candle-25.jpg", d:"Colourful glass jar candle • price per jar"},
+  {id:26, name:"Laddu Candle (Single)", cat:"Gift & Festive", price:20, img:"images/candle-26.jpg", d:"Sweet laddu-shaped candle in a box"},
+  {id:27, name:"Laddu Candle Box (4 pcs)", cat:"Gift & Festive", price:80, img:"images/candle-27.jpg", d:"4 laddu candles in a gift box", tag:"Gift"},
+  {id:28, name:"White Lotus with Leaves", cat:"Lotus & Flower", price:80, img:"images/candle-28.jpg", d:"White lotus on green leaves"},
+  {id:29, name:"Rose Urli Candle", cat:"Urli & Bowl", price:199, img:"images/candle-29.jpg", d:"Gold-edged urli with rose & leaves"},
+  {id:30, name:"Mixed Flower Tealight Box", cat:"Tealight Sets", price:99, img:"images/candle-30.jpg", d:"Box of colourful flower tealights"},
+  {id:31, name:"Red Flower Urli", cat:"Urli & Bowl", price:95, img:"images/candle-31.jpg", d:"Red flower in a gold-edged urli"},
+  {id:32, name:"Sunflower Urli", cat:"Urli & Bowl", price:95, img:"images/candle-32.jpg", d:"Bright sunflower in a gold-edged urli"},
+  {id:33, name:"Flower Candles", cat:"Lotus & Flower", price:16, img:"images/candle-33.jpg", d:"Small flower candles, many colours • price each"},
+  {id:34, name:"Festive Sweet Candles Box", cat:"Gift & Festive", price:85, img:"images/candle-34.jpg", d:"Sweet-shaped candles • price per box", tag:"Gift"},
+  {id:35, name:"Pink Flower Tealights", cat:"Tealight Sets", price:99, img:"images/candle-35.jpg", d:"8 pink flower tealights + flower top"},
+  {id:36, name:"Floral Urli Candle – Rose", cat:"Urli & Bowl", price:130, img:"images/candle-36.jpg", d:"Red rose on green leaves in a gold urli"},
+  {id:37, name:"Red Lotus Candle", cat:"Lotus & Flower", price:95, img:"images/candle-37.jpg", d:"Symbol of peace & positivity"},
+  {id:38, name:"Floating Urli – Red Rose", cat:"Urli & Bowl", price:180, img:"images/candle-38.jpg", d:"Blue water-look urli with red rose"},
+  {id:39, name:"Floating Urli – Lotus Pond", cat:"Urli & Bowl", price:180, img:"images/candle-39.jpg", d:"Lotus pond design with boat & leaves"},
+  {id:40, name:"Scented Bowl Candles", cat:"Urli & Bowl", price:110, img:"images/candle-40.jpg", d:"Golden bowl candles • scented"},
+  {id:41, name:"Lotus Peacock Urli", cat:"Urli & Bowl", price:350, img:"images/candle-41.jpg", d:"Peacock urli with lotus & 6 diyas", tag:"Premium"}
+];
+
+const REVIEWS = [
+  // Add real customer reviews here, e.g. {name:"Lakshmi, Vijayawada", stars:5, text:"Beautiful candles!"}
+];
+/* ========================================================= */
+
+const $ = s => document.querySelector(s);
+const waLink = msg => "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg);
+let cart = {};
+try { cart = JSON.parse(localStorage.getItem("praaviCart")) || {}; } catch(e) { cart = {}; }
+const save = () => { try { localStorage.setItem("praaviCart", JSON.stringify(cart)); } catch(e) {} };
+const rs = n => "₹" + n.toLocaleString("en-IN");
+
+function toast(t){ const el=$("#toast"); el.textContent=t; el.classList.add("show"); clearTimeout(el._t); el._t=setTimeout(()=>el.classList.remove("show"),1600); }
+
+/* Filters & products */
+let current = "All";
+function renderFilters(){
+  const cats = ["All", ...new Set(PRODUCTS.map(p=>p.cat))];
+  $("#filters").innerHTML = cats.map(c=>`<button class="${c===current?'on':''}" onclick="setCat('${c}')">${c}</button>`).join("");
+}
+function zoom(src){ $("#lbimg").src=src; $("#lb").style.display="flex"; }
+function setCat(c){ current=c; renderFilters(); renderProducts(); }
+function renderProducts(){
+  const list = PRODUCTS.filter(p=>current==="All"||p.cat===current);
+  $("#products").innerHTML = list.map(p=>`
+    <div class="card">
+      <div class="pic">${p.tag?`<span class="tag">${p.tag}</span>`:""}🕯️${p.img?`<img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.remove()" onclick="zoom('${p.img}')">`:""}</div>
+      <div class="body">
+        <h3>${p.name}</h3>
+        <div class="d">${p.d||""}</div>
+        <div class="price">${rs(p.price)}${p.old?`<s>${rs(p.old)}</s>`:""}</div>
+        <button class="add" id="add${p.id}" onclick="add(${p.id})">Add to Cart</button>
+      </div>
+    </div>`).join("");
+}
+
+/* Cart */
+function add(id){
+  cart[id]=(cart[id]||0)+1; save(); renderCart();
+  const b=$("#add"+id); if(b){ b.textContent="✓ Added"; b.classList.add("done"); setTimeout(()=>{b.textContent="Add to Cart";b.classList.remove("done")},1200); }
+  toast("Added to cart 🕯️");
+}
+function change(id,d){ cart[id]=(cart[id]||0)+d; if(cart[id]<=0) delete cart[id]; save(); renderCart(); }
+function cartLines(){ return Object.entries(cart).map(([id,q])=>{ const p=PRODUCTS.find(x=>x.id==id); return p?{p,q}:null; }).filter(Boolean); }
+function renderCart(){
+  const lines=cartLines();
+  const n=lines.reduce((a,l)=>a+l.q,0), t=lines.reduce((a,l)=>a+l.q*l.p.price,0);
+  $("#count").textContent=n; $("#nItems").textContent=n; $("#total").textContent=rs(t);
+  $("#items").innerHTML = lines.length ? lines.map(({p,q})=>`
+    <div class="item"><div class="e">${p.img?`<img src="${p.img}" alt="" style="width:46px;height:56px;object-fit:cover;border-radius:6px">`:"🕯️"}</div>
+      <div class="n">${p.name}<small>${rs(p.price)} × ${q} = ${rs(p.price*q)}</small></div>
+      <div class="qty"><button onclick="change(${p.id},-1)">−</button><b>${q}</b><button onclick="change(${p.id},1)">+</button></div>
+    </div>`).join("") : `<div class="empty">Your cart is empty 🕯️<br><br><a class="btn" href="#shop" onclick="closeCart()">Shop now</a></div>`;
+}
+function openCart(){ $("#drawer").classList.add("show"); $("#overlay").classList.add("show"); }
+function closeCart(){ $("#drawer").classList.remove("show"); $("#overlay").classList.remove("show"); }
+function checkout(){
+  const lines=cartLines();
+  if(!lines.length){ toast("Cart is empty"); return; }
+  const name=$("#oname").value.trim(), addr=$("#oaddr").value.trim();
+  let msg="Hello Praavi Candle! 🕯️ I want to order:\n\n";
+  lines.forEach(({p,q},i)=>{ msg+=`${i+1}. ${p.name} × ${q} = ${rs(p.price*q)}\n`; });
+  msg+=`\nTotal: ${rs(lines.reduce((a,l)=>a+l.q*l.p.price,0))}\n`;
+  if(name) msg+=`\nName: ${name}`;
+  if(addr) msg+=`\nAddress: ${addr}`;
+  msg+="\n\nPlease confirm delivery charges and payment details.";
+  window.open(waLink(msg),"_blank");
+}
+
+/* Custom order form */
+$("#cform").addEventListener("submit",e=>{
+  e.preventDefault();
+  const msg=`Hello Praavi Candle! 🕯️ Custom candle enquiry:\n\nName: ${$("#cname").value}\nOccasion: ${$("#cocc").value}\nQuantity: ${$("#cqty").value}\nFragrance: ${$("#cfrag").value}\nDesign / message: ${$("#cmsg").value||"-"}\nNeeded by: ${$("#cdate").value||"-"}\n\nPlease share price and details.`;
+  window.open(waLink(msg),"_blank");
+});
+
+/* Reviews */
+$("#revs").innerHTML = REVIEWS.length ? REVIEWS.map(r=>`<div class="rev"><div class="st">${"★".repeat(r.stars||5)}</div><p>${r.text}</p><small>— ${r.name}</small></div>`).join("")
+  : `<div class="rev" style="grid-column:1/-1;text-align:center"><p>Be our first reviewer! Bought a Praavi candle? Send us a message on WhatsApp 💬</p></div>`;
+
+/* Contact links */
+const hello = waLink("Hello Praavi Candle, I want to place an order.");
+$("#waContact").href = hello; $("#waFloat").href = hello;
+$("#phoneLink").href = "tel:+" + WHATSAPP;
+$("#phoneLink").textContent = "+" + WHATSAPP.slice(0,2) + " " + WHATSAPP.slice(2,7) + " " + WHATSAPP.slice(7);
+$("#yr").textContent = new Date().getFullYear();
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"){ closeCart(); $("#lb").style.display="none"; } });
+
+renderFilters(); renderProducts(); renderCart();
+</script>
 </body>
 </html>
