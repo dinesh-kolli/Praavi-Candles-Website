@@ -204,6 +204,7 @@ footer a{color:#e8c9a9}
       </div>
       <form id="cform">
         <label>Your Name *</label><input id="cname" required>
+        <label>Phone Number</label><input id="cphone" type="tel" inputmode="numeric" placeholder="10-digit mobile">
         <label>Occasion</label>
         <select id="cocc"><option>Birthday</option><option>Wedding</option><option>Return Gifts</option><option>Festival (Diwali / Christmas)</option><option>Anniversary</option><option>Corporate Gift</option><option>Other</option></select>
         <label>How many candles?</label><input id="cqty" type="number" min="1" value="1">
@@ -278,6 +279,7 @@ footer a{color:#e8c9a9}
     <div class="row"><span>Items</span><span id="nItems">0</span></div>
     <div class="row t"><span>Total</span><span id="total">₹0</span></div>
     <label>Your Name</label><input id="oname" placeholder="Name">
+    <label>Phone Number</label><input id="ophone" type="tel" inputmode="numeric" placeholder="10-digit mobile">
     <label>Delivery Address / Town</label><textarea id="oaddr" placeholder="House, street, town, PIN" style="min-height:55px"></textarea>
     <button class="btn alt" onclick="checkout()">Order on WhatsApp</button>
     <p class="note">Delivery charges confirmed on WhatsApp</p>
@@ -292,6 +294,9 @@ footer a{color:#e8c9a9}
    ✏️ EDIT HERE — your WhatsApp number, products and prices
    ========================================================= */
 const WHATSAPP = "919493735855";   // 91 + 10-digit number, no + or spaces
+// Orders are also saved to the owner's private Google Sheet via this Google Form
+const ORDER_FORM = "https://docs.google.com/forms/d/e/1FAIpQLSeCfefLRLdJTQV-QDnEWM15WJSnn1XsxTOsnw5hsdnZgK0BYw/formResponse";
+const FORM_FIELDS = {type:"entry.55946066", name:"entry.1541501929", phone:"entry.1068752824", address:"entry.197774279", items:"entry.1782694485", total:"entry.1290923239"};
 
 const PRODUCTS = [
   {id:1, name:"Terracotta Divya – Pink Flower", cat:"Terracotta Diyas", price:20, img:"images/candle-01.jpg", d:"Eco-friendly terracotta diya with flower"},
@@ -373,6 +378,14 @@ function renderProducts(){
     </div>`).join("");
 }
 
+/* Order log → owner's private Google Sheet */
+function logOrder(o){
+  if(!ORDER_FORM) return;
+  const body=new URLSearchParams();
+  for(const k in FORM_FIELDS) body.append(FORM_FIELDS[k], String(o[k]==null?"":o[k]).slice(0,1500));
+  try{ fetch(ORDER_FORM,{method:"POST",mode:"no-cors",keepalive:true,body}); }catch(e){}
+}
+
 /* Cart */
 function add(id){
   cart[id]=(cart[id]||0)+1; save(); renderCart();
@@ -396,20 +409,23 @@ function closeCart(){ $("#drawer").classList.remove("show"); $("#overlay").class
 function checkout(){
   const lines=cartLines();
   if(!lines.length){ toast("Cart is empty"); return; }
-  const name=$("#oname").value.trim(), addr=$("#oaddr").value.trim();
+  const name=$("#oname").value.trim(), addr=$("#oaddr").value.trim(), phone=$("#ophone").value.trim();
   let msg="Hello Praavi Candle! 🕯️ I want to order:\n\n";
   lines.forEach(({p,q},i)=>{ msg+=`${i+1}. ${p.name} × ${q} = ${rs(p.price*q)}\n`; });
   msg+=`\nTotal: ${rs(lines.reduce((a,l)=>a+l.q*l.p.price,0))}\n`;
   if(name) msg+=`\nName: ${name}`;
+  if(phone) msg+=`\nPhone: ${phone}`;
   if(addr) msg+=`\nAddress: ${addr}`;
   msg+="\n\nPlease confirm delivery charges and payment details.";
+  logOrder({type:"Order",name,phone,address:addr,items:lines.map(({p,q})=>`${p.name} × ${q} = ${rs(p.price*q)}`).join("\n"),total:lines.reduce((a,l)=>a+l.q*l.p.price,0)});
   window.open(waLink(msg),"_blank");
 }
 
 /* Custom order form */
 $("#cform").addEventListener("submit",e=>{
   e.preventDefault();
-  const msg=`Hello Praavi Candle! 🕯️ Custom candle enquiry:\n\nName: ${$("#cname").value}\nOccasion: ${$("#cocc").value}\nQuantity: ${$("#cqty").value}\nFragrance: ${$("#cfrag").value}\nDesign / message: ${$("#cmsg").value||"-"}\nNeeded by: ${$("#cdate").value||"-"}\n\nPlease share price and details.`;
+  const msg=`Hello Praavi Candle! 🕯️ Custom candle enquiry:\n\nName: ${$("#cname").value}\nPhone: ${$("#cphone").value||"-"}\nOccasion: ${$("#cocc").value}\nQuantity: ${$("#cqty").value}\nFragrance: ${$("#cfrag").value}\nDesign / message: ${$("#cmsg").value||"-"}\nNeeded by: ${$("#cdate").value||"-"}\n\nPlease share price and details.`;
+  logOrder({type:"Custom",name:$("#cname").value,phone:$("#cphone").value,address:"",items:`${$("#cocc").value} • Qty ${$("#cqty").value} • ${$("#cfrag").value} • ${$("#cmsg").value||"-"} • Needed by ${$("#cdate").value||"-"}`,total:""});
   window.open(waLink(msg),"_blank");
 });
 
