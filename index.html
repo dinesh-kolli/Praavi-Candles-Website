@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Praavi Candle — Handmade Candles, Diyas & Urli Candles | Order on WhatsApp</title>
-<meta name="description" content="Praavi Candle: handmade terracotta diyas, urli candles, lotus candles, tealight sets and festive gift candles in pure soya wax. Prices from ₹15. Order easily on WhatsApp.">
-<meta name="keywords" content="Praavi Candle, handmade candles, diya candles, urli candle, lotus candle, tealight candles, Diwali candles, gift candles, soya wax candles, terracotta diya">
+<title>Praavi Candles — Handmade Candles, Diyas & Urli Candles | Order on WhatsApp</title>
+<meta name="description" content="Praavi Candles: handmade terracotta diyas, urli candles, lotus candles, tealight sets and festive gift candles in pure soya wax. Prices from ₹15. Order easily on WhatsApp.">
+<meta name="keywords" content="Praavi Candles, handmade candles, diya candles, urli candle, lotus candle, tealight candles, Diwali candles, gift candles, soya wax candles, terracotta diya">
 <link rel="canonical" href="https://dinesh-kolli.github.io/Praavi-Candles-Website/">
 <meta name="robots" content="index, follow">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Praavi Candle — Handmade Candles">
+<meta property="og:title" content="Praavi Candles — Handmade Candles">
 <meta property="og:description" content="Handmade diyas, urli candles, lotus candles and gift sets. Order on WhatsApp.">
 <meta property="og:url" content="https://dinesh-kolli.github.io/Praavi-Candles-Website/">
 <meta property="og:image" content="https://dinesh-kolli.github.io/Praavi-Candles-Website/images/candle-40.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Store","name":"Praavi Candle","url":"https://dinesh-kolli.github.io/Praavi-Candles-Website/","image":"https://dinesh-kolli.github.io/Praavi-Candles-Website/images/candle-40.jpg","description":"Handmade terracotta diyas, urli candles, lotus candles, tealight sets and festive gift candles in pure soya wax.","telephone":"+91-9493735855","priceRange":"₹15 - ₹350","address":{"@type":"PostalAddress","addressCountry":"IN"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Store","name":"Praavi Candles","url":"https://dinesh-kolli.github.io/Praavi-Candles-Website/","image":"https://dinesh-kolli.github.io/Praavi-Candles-Website/images/candle-40.jpg","description":"Handmade terracotta diyas, urli candles, lotus candles, tealight sets and festive gift candles in pure soya wax.","telephone":"+91-9493735855","priceRange":"₹15 - ₹350","address":{"@type":"PostalAddress","addressCountry":"IN"}}</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕯️</text></svg>">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -158,7 +158,7 @@ footer a{color:#e8c9a9}
 
 <header>
   <div class="wrap head">
-    <a href="#home" class="logo">🕯️ Praavi Candle<small>Light Up Your Special Moments</small></a>
+    <a href="#home" class="logo">🕯️ Praavi Candles<small>Light Up Your Special Moments</small></a>
     <nav>
       <a href="#shop">Shop</a>
       <a href="#custom">Customize</a>
@@ -242,8 +242,8 @@ footer a{color:#e8c9a9}
 </section>
 
 <section class="about" id="about">
-  <h2 class="title">About Praavi Candle</h2>
-  <p>Praavi Candle makes beautiful handmade candles for your special moments. Every candle is poured by hand in small batches, with care for quality, fragrance and finish.</p>
+  <h2 class="title">About Praavi Candles</h2>
+  <p>Praavi Candles makes beautiful handmade candles for your special moments. Every candle is poured by hand in small batches, with care for quality, fragrance and finish.</p>
   <p><b>Quality • Creativity • Happiness</b></p>
 </section>
 
@@ -273,7 +273,7 @@ footer a{color:#e8c9a9}
 </section>
 
 <footer>
-  <p>© <span id="yr"></span> Praavi Candle • Handmade with ❤️</p>
+  <p>© <span id="yr"></span> Praavi Candles • Handmade with ❤️</p>
 </footer>
 
 <a class="wa" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
@@ -420,7 +420,7 @@ function checkout(){
   const lines=cartLines();
   if(!lines.length){ toast("Cart is empty"); return; }
   const name=$("#oname").value.trim(), addr=$("#oaddr").value.trim(), phone=$("#ophone").value.trim();
-  let msg="Hello Praavi Candle! 🕯️ I want to order:\n\n";
+  let msg="Hello Praavi Candles! 🕯️ I want to order:\n\n";
   lines.forEach(({p,q},i)=>{ msg+=`${i+1}. ${p.name} × ${q} = ${rs(p.price*q)}\n`; });
   msg+=`\nTotal: ${rs(lines.reduce((a,l)=>a+l.q*l.p.price,0))}\n`;
   if(name) msg+=`\nName: ${name}`;
@@ -434,7 +434,7 @@ function checkout(){
 /* Custom order form */
 $("#cform").addEventListener("submit",e=>{
   e.preventDefault();
-  const msg=`Hello Praavi Candle! 🕯️ Custom candle enquiry:\n\nName: ${$("#cname").value}\nPhone: ${$("#cphone").value||"-"}\nOccasion: ${$("#cocc").value}\nQuantity: ${$("#cqty").value}\nFragrance: ${$("#cfrag").value}\nDesign / message: ${$("#cmsg").value||"-"}\nNeeded by: ${$("#cdate").value||"-"}\n\nPlease share price and details.`;
+  const msg=`Hello Praavi Candles! 🕯️ Custom candle enquiry:\n\nName: ${$("#cname").value}\nPhone: ${$("#cphone").value||"-"}\nOccasion: ${$("#cocc").value}\nQuantity: ${$("#cqty").value}\nFragrance: ${$("#cfrag").value}\nDesign / message: ${$("#cmsg").value||"-"}\nNeeded by: ${$("#cdate").value||"-"}\n\nPlease share price and details.`;
   logOrder({type:"Custom",name:$("#cname").value,phone:$("#cphone").value,address:"",items:`${$("#cocc").value} • Qty ${$("#cqty").value} • ${$("#cfrag").value} • ${$("#cmsg").value||"-"} • Needed by ${$("#cdate").value||"-"}`,total:""});
   window.open(waLink(msg),"_blank");
 });
@@ -444,7 +444,7 @@ $("#revs").innerHTML = REVIEWS.length ? REVIEWS.map(r=>`<div class="rev"><div cl
   : `<div class="rev" style="grid-column:1/-1;text-align:center"><p>Be our first reviewer! Bought a Praavi candle? Send us a message on WhatsApp 💬</p></div>`;
 
 /* Contact links */
-const hello = waLink("Hello Praavi Candle, I want to place an order.");
+const hello = waLink("Hello Praavi Candles, I want to place an order.");
 $("#waContact").href = hello; $("#waFloat").href = hello;
 $("#phoneLink").href = "tel:+" + WHATSAPP;
 $("#phoneLink").textContent = "+" + WHATSAPP.slice(0,2) + " " + WHATSAPP.slice(2,7) + " " + WHATSAPP.slice(7);
